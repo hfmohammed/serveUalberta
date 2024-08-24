@@ -1,42 +1,67 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Global Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #007c41; /* Set the background color */
+  height: 100vh; /* Make sure the html and body are full viewport height */
+  width: 100vw; /* Ensure they are also full viewport width */
+  display: flex;
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  overflow: hidden; /* Prevent any scrolling caused by overflows */
+}
+
+.App {
   text-align: center;
+  width: 100%; /* Full width to align with the parent styling */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.App-header {
+  width: 100%; /* Ensures the header takes full width */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* LoginForm Styles */
+.login-form {
+  width: 100%;
+  max-width: 320px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.login-form h2 {
+  color: #333;
 }
 
-.card {
-  padding: 2em;
+.login-form label {
+  display: block; /* Change from float to display block for better control */
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 14px;
 }
 
-.read-the-docs {
-  color: #888;
+.login-form input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Includes padding and border in the width */
+  margin-bottom: 16px;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #0056b3;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.login-form button:hover {
+  background-color: #003d66;
 }
