@@ -1,32 +1,28 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function LoginForm() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const history = useHistory(); // Hook for navigation
 
-    // hook to add state management to functional components
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const handleLogin = (event) => {
+    event.preventDefault();
+    // Simulate login logic
+    if (username === 'user' && password === 'pass') { // Replace with actual validation
+      history.push('/'); // Redirect to HomePage
+    } else {
+      alert('Invalid credentials');
+    }
+  };
 
-    const handleSubmit = (event) => {
-        // when submit the form, dont let the page relod 
-        event.preventDefault();
-        console.log('Email:', email, 'Password:', password);
-        // Here you can also add logic to verify the credentials
-    };
-
-    return (
-        <form className="login-form" onSubmit={handleSubmit}>
-            <h2>Login</h2>
-            <div>
-                <label>Email:</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-            </div>
-            <div>
-                <label>Password:</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-            </div>
-            <button type="submit">Login</button>
-        </form>
-    );
+  return (
+    <form onSubmit={handleLogin}>
+      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" />
+      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+      <button type="submit">Login</button>
+    </form>
+  );
 }
 
 export default LoginForm;

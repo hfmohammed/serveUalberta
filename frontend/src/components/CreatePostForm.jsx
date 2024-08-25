@@ -1,14 +1,25 @@
-import React from 'react';
-import PostList from './PostList';
-import CreatePostForm from './CreatePostForm';
+import React, { useState } from 'react';
 
-function HomePage() {
+function CreatePostForm() {
+    const [content, setContent] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Post Content:', content);
+        // Here you would typically handle posting the content to a backend
+    };
+
     return (
-        <div>
-            <h1>Research Opportunities</h1>
-            <CreatePostForm /> {/* Component to create new posts */}
-            <PostList /> {/* Component to list all posts */}
-        </div>
+        <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                placeholder="Write something..."
+            />
+            <button type="submit">Post</button>
+        </form>
     );
 }
-export default HomePage;
+
+export default CreatePostForm;
