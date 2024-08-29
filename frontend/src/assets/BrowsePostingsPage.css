@@ -1,0 +1,12 @@
+.browse-postings-page {
+  max-height: 60vh; /* Adjust as needed */
+  overflow-y: auto;
+  padding: 20px;
+  border: 1px solid #ddd; /* Optional: for better visibility */
+}
+
+.post {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* Optional: for better visibility */
+}

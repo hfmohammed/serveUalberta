@@ -1,32 +1,63 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-    // hook to add state management to functional components
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const handleLogin = async (event) => {
+    event.preventDefault();
+  
+    try {
+      // Perform login request
+      const response = await fetch('http://localhost:5111/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password })
+      });
+  
+      if (response.ok) {
+        // Fetch session info
+        const sessionResponse = await fetch('http://localhost:5111/session');
+  
+        if (sessionResponse.ok) {
+          const sessionData = await sessionResponse.json();
+          console.log('Session email:', sessionData);
+          navigate('/');
+        } else {
+          const errorResult = await sessionResponse.text();
+          console.error('Failed to fetch session info:', errorResult);
+          alert('Failed to fetch session info');
+        }
+      } else {
+        const errorResult = await response.text();
+        alert('Login failed: ' + errorResult);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
-    const handleSubmit = (event) => {
-        // when submit the form, dont let the page relod 
-        event.preventDefault();
-        console.log('Email:', email, 'Password:', password);
-        // Here you can also add logic to verify the credentials
-    };
-
-    return (
-        <form className="login-form" onSubmit={handleSubmit}>
-            <h2>Login</h2>
-            <div>
-                <label>Email:</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-            </div>
-            <div>
-                <label>Password:</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-            </div>
-            <button type="submit">Login</button>
-        </form>
-    );
+  return (
+    <form onSubmit={handleLogin}>
+      <input
+        type="text"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <button type="submit">Login</button>
+    </form>
+  );
 }
 
 export default LoginForm;
