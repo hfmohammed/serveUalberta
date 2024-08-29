@@ -20,13 +20,14 @@ function LoginForm() {
       });
   
       if (response.ok) {
+        navigate('/');
+
         // Fetch session info
         const sessionResponse = await fetch('http://localhost:5111/session');
   
         if (sessionResponse.ok) {
           const sessionData = await sessionResponse.json();
           console.log('Session email:', sessionData);
-          navigate('/');
         } else {
           const errorResult = await sessionResponse.text();
           console.error('Failed to fetch session info:', errorResult);
